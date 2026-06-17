@@ -1,0 +1,22 @@
+{
+  "السلام": { "atlas": "Azul", "rif": "Azul", "souss": "Azul" },
+  "كيف حالك": { "atlas": "Mata tgit?", "rif": "Mamk tgit?", "souss": "Manik antgit?" },
+  "بخير": { "atlas": "Labas", "rif": "Labas", "souss": "Labas" },
+  "شكرا": { "atlas": "Tanemmirt", "rif": "Tanemmirt", "souss": "Tanemmirt" },
+  "الماء": { "atlas": "Aman", "rif": "Aman", "souss": "Aman" },
+  "الأرض": { "atlas": "Akal", "rif": "Cal", "souss": "Akal" },
+  "الخروف": { "atlas": "Izimer", "rif": "Izmar", "souss": "Izimer" },
+  "النعجة": { "atlas": "Tixsi", "rif": "Tixsi", "souss": "Tixsi" },
+  "البقرة": { "atlas": "Tafunast", "rif": "Tafunast", "souss": "Tafunast" },
+  "الحليب": { "atlas": "Aɣu", "rif": "Aɣi", "souss": "Aɣu" },
+  "الزبدة": { "atlas": "Udi", "rif": "Dduhant", "souss": "Udi" },
+  "الزيتون": { "atlas": "Azemmur", "rif": "Azemmur", "souss": "Azemmur" },
+  "الطبيب": { "atlas": "Abitar", "rif": "Tbib", "souss": "Tbib" },
+  "مريض": { "atlas": "Yuden", "rif": "Yuden", "souss": "Yuden" },
+  "الدواء": { "atlas": "Asafar", "rif": "Ddwa", "souss": "Assafar" },
+  "البيت": { "atlas": "Taddart", "rif": "Taddart", "souss": "Tigmmi" },
+  "السوق": { "atlas": "Suq", "rif": "Suq", "souss": "Suq" },
+  "الثمن": { "atlas": "Atig", "rif": "Ssuma", "souss": "Atig" },
+  "أريد": { "atlas": "Riɣ", "rif": "Xeɣ", "souss": "Riɣ" },
+  "ساعدني": { "atlas": "Awes-i", "rif": "Ɛawen-iyi", "souss": "Awes-iyi" }
+}
