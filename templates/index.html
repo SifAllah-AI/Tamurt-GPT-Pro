@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamurt-GPT-Pro - أقوى بوت أمازيغي</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma; background: #121212; color: #e0e0e0; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 15px; box-shadow: 0 0 20px rgba(0,255,136,0.2); }
+        h1 { text-align: center; color: #00ff88; }
+        .dialect-btn { background: #333; color: #fff; border: 1px solid #00ff88; padding: 10px 15px; margin: 5px; border-radius: 8px; cursor: pointer; }
+        .dialect-btn.active { background: #00ff88; color: #121212; }
+        #chat-box { height: 400px; overflow-y: auto; border: 1px solid #333; padding: 10px; margin: 20px 0; border-radius: 10px; }
+        .msg { margin: 10px 0; padding: 10px; border-radius: 10px; }
+        .user-msg { background: #004d40; text-align: left; }
+        .bot-msg { background: #263238; }
+        .speak-btn { background: #00ff88; color: #121212; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 5px; }
+        #input-area { display: flex; }
+        #user-input { flex-grow: 1; padding: 10px; border-radius: 8px; border: 1px solid #333; background: #2c2c2c; color: #fff; }
+        #send-btn { background: #00ff88; color: #121212; border: none; padding: 10px 20px; margin-right: 10px; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💚 Tamurt-GPT-Pro 💚</h1>
+        <p style="text-align: center;">أول مساعد ذكي أمازيغي كيهضر و يناقش و يعلم</p>
+        <div id="dialects">
+            <button class="dialect-btn active" data-dialect="souss">تشلحيت سوس</button>
+            <button class="dialect-btn" data-dialect="atlas">تمازيغت الأطلس</button>
+            <button class="dialect-btn" data-dialect="rif">تاريفيت</button>
+        </div>
+        <div id="chat-box"></div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="سول هنايا... Azul, manzak?">
+            <button id="send-btn">صيفط</button>
+        </div>
+    </div>
+    <script>
+        let selectedDialect = 'souss';
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        document.querySelectorAll('.dialect-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelector('.dialect-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                selectedDialect = btn.dataset.dialect;
+            };
+        });
+        async function sendMessage() {
+            const message = userInput.value;
+            if (!message) return;
+            chatBox.innerHTML += `<div class="msg user-msg">${message}</div>`;
+            userInput.value = '';
+            const res = await fetch('/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message, dialect: selectedDialect }) });
+            const data = await res.json();
+            const botMsgId = 'msg-' + Date.now();
+            chatBox.innerHTML += `<div class="msg bot-msg" id="${botMsgId}">${data.answer.replace(/\n/g, '<br>')}<br><button class="speak-btn" onclick="speakText('${botMsgId}')">🎤 سمع الجواب</button></div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        async function speakText(msgId) {
+            const text = document.getElementById(msgId).innerText.replace('🎤 سمع الجواب', '');
+            const res = await fetch('/speak', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
+            const blob = await res.blob();
+            new Audio(URL.createObjectURL(blob)).play();
+        }
+        sendBtn.onclick = sendMessage;
+        userInput.onkeyup = (e) => { if (e.key === 'Enter') sendMessage(); };
+    </script>
+</body>
+</html>
